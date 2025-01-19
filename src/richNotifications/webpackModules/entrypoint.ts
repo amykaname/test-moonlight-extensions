@@ -28,6 +28,7 @@ function cleanContent(content: string, guild?: Guild) {
 }
 
 let currentNotificationData: CurrentNotificationData = undefined;
+let currentFluxMessage: { message: Message, channelId: string, guildId: string } | undefined = undefined;
 
 natives.on(MaxineIpcEvents.NOTIFICATON_CLICK, (event, id: number) => {
     logger.info(`Clicked notification ${id}`);
@@ -82,6 +83,10 @@ export class NotificationEx {
             let message: Message | undefined = undefined;
             if (notif) {
                 message = MessageStore.getMessage(notif.source.channel_id, notif.source.message_id);
+            }
+            
+            if (!message) {
+                message = currentFluxMessage?.message;
             }
         
             let guild: Guild | undefined = undefined;
@@ -161,3 +166,8 @@ export function handleShowNotification(
         data: l
     };
 };
+
+export function interceptMessageCreate(event: any) {
+    // logger.info('interceptMessageCreate', event);
+    currentFluxMessage = event;
+}

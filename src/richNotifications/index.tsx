@@ -16,6 +16,16 @@ export const patches: ExtensionWebExports["patches"] = [
                 return ($1).apply(this, args);
             }`,
         }]
+    },
+    {
+        find: /"displayName","NotificationStore"/g,
+        replace: [{
+            match: /MESSAGE_CREATE:function\((\w+)\){/g,
+            replacement: `
+                MESSAGE_CREATE: function($1) {
+                    require("richNotifications_entrypoint").interceptMessageCreate($1);
+            `
+        }]
     }
 ];
 
