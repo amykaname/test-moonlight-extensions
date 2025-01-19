@@ -4,10 +4,10 @@
   "version": "1.0.0",
   "apiLevel": 2,
   "meta": {
-    "name": "richNotifications",
+    "name": "Rich Notifications",
     "tagline": "Windows 8+ notifications for Discord",
     "description": "What it says on the tin, silly!",
     "authors": ["uwx"],
-    "source": "https://todo.invalid/"
+    "source": "https://github.com/uwx/moonlight-richNotifications"
   }
 }
