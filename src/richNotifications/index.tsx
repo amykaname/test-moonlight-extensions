@@ -112,45 +112,49 @@ class NotificationEx {
     }
 
     constructor(title: string, options?: NotificationOptions) {
-        this.id = _id++;
+        try {
+            this.id = _id++;
 
-        this.title = title;
-        this.body = options?.body;
-        this.icon = options?.icon;
+            this.title = title;
+            this.body = options?.body;
+            this.icon = options?.icon;
 
-        notifs.set(this.id, this);
+            notifs.set(this.id, this);
 
-        const notif = currentNotificationData?.data?.tag === options?.tag ? currentNotificationData : undefined;
+            const notif = currentNotificationData?.data?.tag === options?.tag ? currentNotificationData : undefined;
 
-        logger.info("Notification created", this.id, notif);
+            logger.info("Notification created", this.id, notif);
 
-        let message: Message | undefined = undefined;
-        if (notif) {
-            message = MessageStore.getMessage(notif.source.channel_id, notif.source.message_id);
+            let message: Message | undefined = undefined;
+            if (notif) {
+                message = MessageStore.getMessage(notif.source.channel_id, notif.source.message_id);
+            }
+
+            let guild: Guild | undefined = undefined;
+            if (notif?.source.guild_id) {
+                guild = GuildStore.getGuild(notif.source.guild_id);
+            }
+
+            let content = options?.body;
+            if (message) {
+                content = cleanContent(message?.content, guild);
+            }
+
+            natives.sendNotification(this.id, undefined, {
+                title: title,
+                icon: options?.icon?.replace(/\.webp/, ".png"),
+                message: content,
+                attribution: "from Discord",
+                uniqueID: options?.tag,
+                silent: true,
+                sequenceNumber: this.id,
+            }).then(() => this.onshow());
+
+            // fallback?
+            setTimeout(() => this.close(), 10000);
+        } catch (err) {
+            logger.error("Failed to create notification", err);
         }
-
-        let guild: Guild | undefined = undefined;
-        if (notif?.source.guild_id) {
-            guild = GuildStore.getGuild(notif.source.guild_id);
-        }
-
-        let content = options?.body;
-        if (message) {
-            content = cleanContent(message?.content, guild);
-        }
-
-        natives.sendNotification(this.id, undefined, {
-            title: title,
-            icon: options?.icon?.replace(/\.webp/, ".png"),
-            message: content,
-            attribution: "from Discord",
-            uniqueID: options?.tag,
-            silent: true,
-            sequenceNumber: this.id,
-        }).then(() => this.onshow());
-
-        // fallback?
-        setTimeout(() => this.close(), 10000);
     }
 }
 
