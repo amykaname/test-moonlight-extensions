@@ -95,7 +95,7 @@ export class NotificationEx {
             if (message) {
                 content = cleanContent(message?.content, guild);
 
-                if (message.attachments.length > 0) {
+                if (message.attachments.length > 0 && message.attachments[0].content_type.startsWith('image/')) {
                     attachment = message.attachments[0].proxy_url;
                 }
             }
@@ -105,6 +105,7 @@ export class NotificationEx {
             natives.sendNotification(this.id, undefined, {
                 title: title,
                 icon: options?.icon?.replace(/\.webp/, ".png"),
+                cropIcon: true,
                 message: content,
                 attribution: "from Discord",
                 uniqueID: options?.tag,
