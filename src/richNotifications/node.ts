@@ -1,4 +1,4 @@
-import { ipcRenderer } from "electron";
+import { ipcRenderer, type IpcRendererEvent } from "electron";
 import { MaxineIpcEvents } from "./shared";
 import type { ToastOptions } from "./types";
 
@@ -10,6 +10,9 @@ export function closeNotification(notifId: number): Promise<void> {
     return ipcRenderer.invoke(MaxineIpcEvents.CLOSE_NOTIFICATION, notifId);
 }
 
-export function on(event: string, listener: (...args: any[]) => void): void {
-    ipcRenderer.on(event, (event, ...args) => listener(...args));
+export function on(channel: string, listener: (event: IpcRendererEvent, ...args: any[]) => void): void {
+    ipcRenderer.on(channel, (event, ...args) => {
+        console.log('richNotifications calling', channel, event, ...args);
+        listener(event, ...args);
+    });
 }

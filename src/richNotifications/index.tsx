@@ -28,12 +28,12 @@ const natives: typeof import('./node') = moonlight.getNatives("richNotifications
 let currentNotificationData: CurrentNotificationData = undefined;
 
 natives.on(MaxineIpcEvents.NOTIFICATON_CLICK, (event, id: number) => {
-    logger.debug(`Clicked notification ${id}`);
+    logger.info(`Clicked notification ${id}`);
     notifs.get(id)?.onclick();
 });
 
 natives.on(MaxineIpcEvents.NOTIFICATON_CLOSE, (event, id: number) => {
-    logger.debug(`Closed notification ${id}`);
+    logger.info(`Closed notification ${id}`);
     notifs.get(id)?.onclose();
     notifs.delete(id);
 });
