@@ -1,4 +1,3 @@
-
 export interface ToastOptions {
     /**
      * Your Application User Model ID a.k.a. AUMID.
