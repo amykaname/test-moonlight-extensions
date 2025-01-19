@@ -1,4 +1,5 @@
 import { UserStore, GuildMemberStore, ChannelStore, MessageStore, GuildStore } from "@moonlight-mod/wp/common_stores";
+import { MaxineIpcEvents } from "richNotifications/shared";
 
 const natives: typeof import('../node') = moonlight.getNatives("richNotifications");
 
@@ -13,7 +14,7 @@ const userRegex = /<@!?(\d+)>/g;
 const roleRegex = /<@&(\d+)>/g;
 const channelRegex = /<#(\d+)>/g;
 const emojiRegex = /<a?:([a-zA-Z0-9_]+):(\d+)>/g;
-const timestampRegex = /<t:(-?\d{1,13})(:([DFRTdft]))?>/g;
+const timestampRegex = /<t:(-?\d{1,13})(:([DFRTdft]))?>/g; // TODO unused
 const spoilerRegex = /\|\|(.*?)\|\|/gs;
 
 function cleanContent(content: string, guild?: Guild) {
@@ -26,39 +27,127 @@ function cleanContent(content: string, guild?: Guild) {
         .replace(/^.{129,}$/, $$ => `${$$.slice(0, 125)}...`);
 }
 
-// @ts-expect-error intentional
-window.Maxine ??= {};
+let currentNotificationData: CurrentNotificationData = undefined;
 
-window.Maxine.hydrateNotification = async (self: NotificationExBase, currentNotificationData: CurrentNotificationData, title: string, options?: NotificationOptions) => { 
-    const notif = currentNotificationData?.data?.tag === options?.tag ? currentNotificationData : undefined;
+natives.on(MaxineIpcEvents.NOTIFICATON_CLICK, (event, id: number) => {
+    logger.info(`Clicked notification ${id}`);
+    notifs.get(id)?.onclick();
+});
 
-    logger.info("Notification created, hydrating", self.id, notif);
+natives.on(MaxineIpcEvents.NOTIFICATON_CLOSE, (event, id: number) => {
+    logger.info(`Closed notification ${id}`);
+    notifs.get(id)?.onclose();
+    notifs.delete(id);
+});
 
-    let message: Message | undefined = undefined;
-    if (notif) {
-        message = MessageStore.getMessage(notif.source.channel_id, notif.source.message_id);
+const notifs = new Map<number, NotificationEx>();
+
+let _id = 0;
+export class NotificationEx {
+    public id: number;
+    public title?: string;
+    public body?: NotificationOptions["body"];
+    public icon?: NotificationOptions["icon"];
+    public onshow = () => { };
+    public onclick = () => { };
+    public onclose = () => { };
+
+    static permission = "granted";
+
+    static __orig = window.Notification;
+
+    static requestPermission(callback: () => any) {
+        callback();
     }
 
-    let guild: Guild | undefined = undefined;
-    if (notif?.source.guild_id) {
-        guild = GuildStore.getGuild(notif.source.guild_id);
+    close() {
+        natives.closeNotification(this.id).then(() => this.onclose());
+        notifs.delete(this.id);
     }
 
-    let content = options?.body;
-    if (message) {
-        content = cleanContent(message?.content, guild);
+    constructor(title: string, options?: NotificationOptions) {
+        this.id = _id++;
+
+        this.title = title;
+        this.body = options?.body;
+        this.icon = options?.icon;
+
+        notifs.set(this.id, this);
+
+        try {
+            const notif = currentNotificationData?.data?.tag === options?.tag ? currentNotificationData : undefined;
+
+            logger.info("Notification created, hydrating", this.id, notif);
+
+            let message: Message | undefined = undefined;
+            if (notif) {
+                message = MessageStore.getMessage(notif.source.channel_id, notif.source.message_id);
+            }
+        
+            let guild: Guild | undefined = undefined;
+            if (notif?.source.guild_id) {
+                guild = GuildStore.getGuild(notif.source.guild_id);
+            }
+        
+            let content = options?.body;
+            if (message) {
+                content = cleanContent(message?.content, guild);
+            }
+        
+            natives.sendNotification(this.id, undefined, {
+                title: title,
+                icon: options?.icon?.replace(/\.webp/, ".png"),
+                message: content,
+                attribution: "from Discord",
+                uniqueID: options?.tag,
+                silent: true,
+                sequenceNumber: this.id,
+            }).then(() => this.onshow());
+
+            // fallback?
+            setTimeout(() => this.close(), 10000);
+        } catch (err) {
+            logger.error("Failed to hydrate notification", err);
+        }
     }
-
-    natives.sendNotification(self.id, undefined, {
-        title: title,
-        icon: options?.icon?.replace(/\.webp/, ".png"),
-        message: content,
-        attribution: "from Discord",
-        uniqueID: options?.tag,
-        silent: true,
-        sequenceNumber: self.id,
-    }).then(() => self.onshow());
-
-    // fallback?
-    setTimeout(() => self.close(), 10000);
 }
+
+// e=image
+// t=user+server
+// n=contents
+export function handleShowNotification(
+    e: string,
+    t: string,
+    n: string,
+    i: {
+        channel_id: string,
+        channel_type: number,
+        guild_id: string | null,
+        message_id: string,
+        message_type: number,
+        notif_type: string,
+        notif_user_id: string,
+    },
+    l: {
+        omitViewTracking: boolean,
+        onClick: () => void,
+        onShown: () => any,
+        sound: unknown | null,
+        soundpack: undefined,
+        tag: string,
+        volume: number,
+        overrideStreamerMode?: boolean,
+        playSoundIfDisabled?: boolean,
+        omitClickTracking?: boolean,
+    }
+) {
+    logger.debug('handleShowNotification', e, t, n, i, l);
+
+    currentNotificationData = {
+        icon: e,
+        title: t,
+        body: n,
+        source: i,
+        data: l
+    };
+};
