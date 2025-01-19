@@ -6,7 +6,7 @@
   "meta": {
     "name": "Rich Notifications",
     "tagline": "Windows 8+ notifications for Discord",
-    "description": "What it says on the tin, silly!",
+    "description": "Adds support for Windows 8.1+ toasts, including inline attachments in your notifications. Windows only.",
     "authors": ["uwx"],
     "source": "https://github.com/uwx/moonlight-richNotifications"
   }
