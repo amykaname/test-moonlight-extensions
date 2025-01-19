@@ -1,0 +1,13 @@
+{
+  "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
+  "id": "noNotificationSoundExceptDms",
+  "version": "1.0.0",
+  "apiLevel": 2,
+  "meta": {
+    "name": "No Notification Sound Except DMs",
+    "tagline": "Mutes notification sounds except when coming from DMs.",
+    "description": "Mutes notification sounds except when coming from DMs.",
+    "authors": ["uwx"],
+    "source": "https://github.com/uwx/moonlight-richNotifications"
+  }
+}
