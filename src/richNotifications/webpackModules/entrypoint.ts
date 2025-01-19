@@ -89,10 +89,18 @@ export class NotificationEx {
                 guild = GuildStore.getGuild(notif.source.guild_id);
             }
         
+            let attachment: string | undefined = undefined;
+
             let content = options?.body;
             if (message) {
                 content = cleanContent(message?.content, guild);
+
+                if (message.attachments.length > 0) {
+                    attachment = message.attachments[0].proxy_url;
+                }
             }
+
+            logger.info('DEBUG:', message, guild);
         
             natives.sendNotification(this.id, undefined, {
                 title: title,
@@ -102,6 +110,7 @@ export class NotificationEx {
                 uniqueID: options?.tag,
                 silent: true,
                 sequenceNumber: this.id,
+                inlineImg: attachment,
             }).then(() => this.onshow());
 
             // fallback?
@@ -141,7 +150,7 @@ export function handleShowNotification(
         omitClickTracking?: boolean,
     }
 ) {
-    logger.debug('handleShowNotification', e, t, n, i, l);
+    logger.info('handleShowNotification', e, t, n, i, l);
 
     currentNotificationData = {
         icon: e,
