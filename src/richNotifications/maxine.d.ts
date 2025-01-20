@@ -10,6 +10,9 @@ declare type CurrentNotificationData = {
         message_type: number,
         notif_type: string,
         notif_user_id: string,
+        
+        ___MaxineMessage: Message,
+        ___MaxineChannel: Channel,
     },
     data: {
         omitViewTracking: boolean,

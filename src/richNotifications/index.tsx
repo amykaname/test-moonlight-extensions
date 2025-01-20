@@ -25,6 +25,15 @@ export const patches: ExtensionWebExports["patches"] = [
                 MESSAGE_CREATE: function($1) {
                     require("richNotifications_entrypoint").interceptMessageCreate($1);
             `
+        }, {
+            match: /message_id:(\w+).id,message_type:\1.type,channel_id:(\w+).id,channel_type:\2.type,/,
+            replacement: `
+                message_id: $1.id,
+                message_type: $1.type,
+                channel_id: $2.id,
+                channel_type: $2.type,
+                ___MaxineMessage: $1,
+                ___MaxineChannel: $2,` 
         }]
     }
 ];

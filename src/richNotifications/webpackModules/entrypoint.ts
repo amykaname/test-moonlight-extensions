@@ -28,7 +28,7 @@ function cleanContent(content: string, guild?: Guild) {
 }
 
 let currentNotificationData: CurrentNotificationData = undefined;
-let currentFluxMessage: { message: Message, channelId: string, guildId: string } | undefined = undefined;
+let fluxMessageCache = new Map<string, { message: Message, channelId: string, guildId: string }>(); 
 
 natives.on(MaxineIpcEvents.NOTIFICATON_CLICK, (event, id: number) => {
     logger.info(`Clicked notification ${id}`);
@@ -83,14 +83,10 @@ export class NotificationEx {
             let message: Message | undefined = undefined;
             let channel: Channel | undefined = undefined;
             if (notif) {
-                message = MessageStore.getMessage(notif.source.channel_id, notif.source.message_id);
-                channel = ChannelStore.getChannel(notif.source.channel_id);
+                message = MessageStore.getMessage(notif.source.channel_id, notif.source.message_id) ?? notif.source.___MaxineMessage;
+                channel = ChannelStore.getChannel(notif.source.channel_id) ?? notif.source.___MaxineChannel;
             }
             
-            if (!message) {
-                message = currentFluxMessage?.message;
-            }
-        
             let guild: Guild | undefined = undefined;
             if (notif?.source.guild_id) {
                 guild = GuildStore.getGuild(notif.source.guild_id);
@@ -147,6 +143,9 @@ export function handleShowNotification(
         message_type: number,
         notif_type: string,
         notif_user_id: string,
+        
+        ___MaxineMessage: Message,
+        ___MaxineChannel: Channel,
     },
     l: {
         omitViewTracking: boolean,
@@ -172,7 +171,6 @@ export function handleShowNotification(
     };
 };
 
-export function interceptMessageCreate(event: any) {
-    // logger.info('interceptMessageCreate', event);
-    currentFluxMessage = event;
+export function interceptMessageCreate(event: { message: Message; channelId: string; guildId: string; }) {
+    // unused for now
 }
