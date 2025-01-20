@@ -100,7 +100,7 @@ export class NotificationEx {
             if (message) {
                 content = cleanContent(message?.content, guild);
 
-                if (message.attachments.length > 0 && message.attachments[0].content_type.startsWith('image/')) {
+                if (message.attachments.length > 0 && message.attachments[0].content_type.startsWith('image/') && !message.attachments[0].filename.startsWith('SPOILER_')) {
                     attachment = message.attachments[0].proxy_url;
                 }
             }
