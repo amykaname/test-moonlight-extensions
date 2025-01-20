@@ -29,3 +29,4 @@ type GuildMember = any;
 type User = any;
 type Guild = any;
 type Message = any;
+type Channel = any;

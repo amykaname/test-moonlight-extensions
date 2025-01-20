@@ -81,8 +81,10 @@ export class NotificationEx {
             logger.info("Notification created, hydrating", this.id, notif);
 
             let message: Message | undefined = undefined;
+            let channel: Channel | undefined = undefined;
             if (notif) {
                 message = MessageStore.getMessage(notif.source.channel_id, notif.source.message_id);
+                channel = ChannelStore.getChannel(notif.source.channel_id);
             }
             
             if (!message) {
@@ -100,12 +102,15 @@ export class NotificationEx {
             if (message) {
                 content = cleanContent(message?.content, guild);
 
-                if (message.attachments.length > 0 && message.attachments[0].content_type.startsWith('image/') && !message.attachments[0].filename.startsWith('SPOILER_')) {
+                if (message.attachments.length > 0 &&
+                    message.attachments[0].content_type.startsWith('image/') &&
+                    !message.attachments[0].filename.startsWith('SPOILER_') &&
+                    (!channel || !channel.nsfw)) {
                     attachment = message.attachments[0].proxy_url;
                 }
             }
 
-            logger.info('DEBUG:', message, guild);
+            logger.info('DEBUG:', message, guild, channel);
         
             natives.sendNotification(this.id, undefined, {
                 title: title,
