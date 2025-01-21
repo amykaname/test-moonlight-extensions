@@ -1,0 +1,13 @@
+{
+  "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
+  "id": "toggleReadNotificationsAloud",
+  "version": "1.0.0",
+  "apiLevel": 2,
+  "meta": {
+    "name": "Toggle Text-to-Speech Notifications",
+    "tagline": "Press Ctrl+Shift+M to toggle the Text-to-Speech Notifications setting.",
+    "description": "Press Ctrl+Shift+M to toggle the Text-to-Speech Notifications setting between 'For current selected channel' and 'Never'.",
+    "authors": ["uwx"],
+    "source": "https://github.com/uwx/moonlight-extensions"
+  }
+}
