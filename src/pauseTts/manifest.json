@@ -1,0 +1,13 @@
+{
+  "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
+  "id": "pauseTts",
+  "version": "1.0.0",
+  "apiLevel": 2,
+  "meta": {
+    "name": "Pause Text to Speech",
+    "tagline": "Press Ctrl+B to pause/resume TTS",
+    "description": "Press Ctrl+B to pause/resume TTS. Note that this only does anything if a TTS message is currently being spoken or queued to be spoken.",
+    "authors": ["uwx"],
+    "source": "https://github.com/uwx/moonlight-extensions"
+  }
+}
