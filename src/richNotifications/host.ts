@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { app, ipcMain, Notification } from "electron";
 import { constants as FsConstants, mkdirSync } from "node:fs";
-import { access, writeFile } from "node:fs/promises";
+import { access, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import type { ToastOptions } from "./types.js";
@@ -28,6 +28,11 @@ async function cacheIcon(icon: string): Promise<string> {
     if (!await exists(file)) {
         await writeFile(file, Buffer.from(await fetch(icon).then(e => e.arrayBuffer())));
     }
+
+    setTimeout(async () => {
+        await unlink(file);
+    }, 15_000);
+
     return path.resolve(file);
 }
 
