@@ -13,15 +13,6 @@ export const patches: ExtensionWebExports["patches"] = [
             match: /canUseEmojisEverywhere:(\w+),/,
             replacement: 'canUseEmojisEverywhere: () => true,'
         }]
-    },
-    {
-        find: /async sendMessage\((\w+),(\w+)\)\{/,
-        replace: [{
-            match: /async sendMessage\((\w+),(\w+)\)\{/,
-            replacement: `async sendMessage($1,$2){
-                require('freeMoji_entrypoint').interceptMessageSend($1, $2);
-                `
-        }]
     }
 ];
 
@@ -30,6 +21,7 @@ export const webpackModules: ExtensionWebExports["webpackModules"] = {
     entrypoint: {
         dependencies: [
             { ext: "common", id: "stores" },
+            { ext: 'spacepack', id: 'spacepack' },
         ],
         entrypoint: true
     },

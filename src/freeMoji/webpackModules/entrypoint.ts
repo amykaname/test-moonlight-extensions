@@ -1,4 +1,5 @@
 import { EmojiStore, SelectedGuildStore } from "@moonlight-mod/wp/common_stores";
+import spacepack from "@moonlight-mod/wp/spacepack_spacepack";
 
 const logger = moonlight.getLogger("freeMoji/entrypoint");
 logger.info('Hello from freeMoji/entrypoint!');
@@ -9,11 +10,14 @@ interface Message {
     invalidEmojis: any[];
 }
 
-export function interceptMessageSend(e: any, n: any) {
-    logger.info('interceptMessageSend', e, n);
+const COOL = "Queueing message to be sent";
+const module = spacepack.findByCode(COOL)[0].exports;
 
-    modifyIfNeeded(n); // i think it's n
-}
+const originalSend = module.Z.sendMessage;
+module.Z.sendMessage = async (...args: any[]) => {
+	modifyIfNeeded(args[1]);
+	return originalSend.call(module.Z, ...args);
+};
 
 
 // https://github.com/luimu64/nitro-spoof/blob/1bb75a2471c39669d590bfbabeb7b922672929f5/index.js#L25
