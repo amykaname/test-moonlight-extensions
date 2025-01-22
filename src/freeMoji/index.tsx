@@ -18,7 +18,7 @@ export const patches: ExtensionWebExports["patches"] = [
         find: /async sendMessage\((\w+),(\w+)\)\{/,
         replace: [{
             match: /async sendMessage\((\w+),(\w+)\)\{/,
-            replacement: `async sendMessage($1, $2) {
+            replacement: `async sendMessage($1,$2){
                 require('freeMoji_entrypoint').interceptMessageSend($1, $2);
                 `
         }]
