@@ -40,7 +40,7 @@ function extractUnusableEmojis(messageString: string, size: number) {
 			messageString = messageString.replace(emojiString[0], "");
 			// Add to emotes to send
             
-			emojiUrls.push(`https://cdn.discordapp.com/emojis/${emoji.id}.webp?size=60`);
+			emojiUrls.push(`https://cdn.discordapp.com/emojis/${emoji.id}.webp?size=48${emoji.animated ? '&animated=true' : ''}`);
 		}
 	}
 
