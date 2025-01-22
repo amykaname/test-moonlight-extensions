@@ -6,8 +6,8 @@
   "meta": {
     "name": "Freemoji",
     "tagline": "Free Nitro emoji!",
-    "description": "Sends external emoji as image URLs instead.",
-    "authors": ["uwx"],
+    "description": "Sends external emoji as image URLs instead. Based on the Vendetta extension by @maisymoe",
+    "authors": ["uwx", "maisymoe"],
     "source": "https://github.com/uwx/moonlight-extensions"
   }
 }
