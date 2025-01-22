@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+index 290c32c2ddf2b5addc6e8bc89024e1b8ee77edb5..9ad1084f787c0b4baa7ed3ffd6c6e3201d8f8551 100644
+--- a/package.json
++++ b/package.json
+@@ -16,7 +16,7 @@
+   "main": "dist/recognizers-text-date-time.umd.js",
+   "module": "dist/recognizers-text-date-time.es5.js",
+   "typings": "dist/types/recognizers-text-date-time.d.ts",
+-  "browser": "dist/recognizers-text-date-time.browser.js",
++  "browser": "dist/recognizers-text-date-time.es5.js",
+   "repository": {
+     "type": "git",
+     "url": "https://github.com/Microsoft/Recognizers-Text"

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
+  "id": "sendTimestamps",
+  "version": "1.0.0",
+  "apiLevel": 2,
+  "meta": {
+    "name": "Send Timestamps",
+    "tagline": "Adds a .time command to send timestamps written in natural language",
+    "description": "Adds a .time command to send timestamps written in natural language. For instance: \".send tomorrow at 2pm\" will send a message with a timestamp pointing to \"tomorrow at 2pm\" local time. To send in alternative formats, use one of: .timeshortdate, .timelongdate, .timelongdateshorttime, .timefull, .timeshorttime, .timelongtime, .timerelative. Defaults to .timerelative.",
+    "authors": ["uwx"],
+    "source": "https://github.com/uwx/moonlight-extensions"
+  },
+  "dependencies": ["commands"]
+}
