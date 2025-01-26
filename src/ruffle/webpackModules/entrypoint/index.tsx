@@ -1,7 +1,7 @@
 import React, { useState } from '@moonlight-mod/wp/react';
 import type { Props } from './types';
 import { Flash } from './ruffle';
-import type { AutoPlay, NetworkingAccessMode } from '@ruffle/public/config';
+import type { AutoPlay, NetworkingAccessMode, OpenURLMode } from '@ruffle/public/config';
 
 const logger = moonlight.getLogger('ruffle/entrypoint');
 
@@ -24,6 +24,8 @@ export function handleFileEmbed(props: Props) {
                 allowScriptAccess: false,
                 showSwfDownload: true,
                 favorFlash: false,
+                polyfills: false,
+                openUrlMode: 'confirm' as OpenURLMode,
                 base: 'https://this-is-unsafe.invalid/',
             }}
             width={550}
