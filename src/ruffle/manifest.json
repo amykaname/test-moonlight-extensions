@@ -10,5 +10,6 @@
     "authors": ["uwx"],
     "source": "https://github.com/uwx/moonlight-extensions"
   },
-  "dependencies": []
+  "dependencies": [],
+  "cors": ["https://cdn.discordapp.com/attachments/"]
 }
