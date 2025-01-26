@@ -2,6 +2,7 @@ import React, { useEffect, useState } from '@moonlight-mod/wp/react';
 import type { Props } from './types';
 import { Flash } from './ruffle';
 import type { AutoPlay, NetworkingAccessMode, OpenURLMode } from '@ruffle/public/config';
+import { toString } from 'uint8arrays';
 
 const logger = moonlight.getLogger('ruffle/entrypoint');
 
@@ -26,7 +27,7 @@ export function handleFileEmbed(props: Props) {
             title="Ruffle Frame"
             width="550"
             height="400"
-            src={`https://uwx.github.io/moonlight-ruffle-player-backend/#${btoa(String.fromCharCode(...swf))}`}
+            src={`https://uwx.github.io/moonlight-ruffle-player-backend/#${toString(swf, 'base64')}`}
         />
     ) : (
         <button style={{ width: '550px', height: '400px', display: 'block', cursor: 'pointer' }} type="button" tabIndex={0} onClick={() => setShowing(true)}>
