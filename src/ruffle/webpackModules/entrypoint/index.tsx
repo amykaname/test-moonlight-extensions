@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from '@moonlight-mod/wp/react';
 import type { Props } from './types';
-import { Flash } from './ruffle';
-import type { AutoPlay, NetworkingAccessMode, OpenURLMode } from '@ruffle/public/config';
 import { toString } from 'uint8arrays';
 
 const logger = moonlight.getLogger('ruffle/entrypoint');
