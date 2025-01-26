@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from '@moonlight-mod/wp/react';
 import type { Props } from './types';
-import { toString } from 'uint8arrays';
+import { toString as ui8ToString } from 'uint8arrays';
 
 const logger = moonlight.getLogger('ruffle/entrypoint');
 
@@ -15,9 +15,10 @@ export function handleFileEmbed(props: Props) {
     const [swf, setSwf] = useState<Uint8Array>();
 
     useEffect(() => {
-        fetch(props.url)
-            .then(e => e.arrayBuffer())
-            .then(buf => setSwf(new Uint8Array(buf)));
+        if (showing)
+            fetch(props.url)
+                .then(e => e.arrayBuffer())
+                .then(buf => setSwf(new Uint8Array(buf)));
     }, [showing])
 
     return showing && swf ? (
@@ -25,7 +26,7 @@ export function handleFileEmbed(props: Props) {
             title="Ruffle Frame"
             width="550"
             height="400"
-            src={`https://uwx.github.io/moonlight-ruffle-player-backend/#${toString(swf, 'base64')}`}
+            src={`https://uwx.github.io/moonlight-ruffle-player-backend/#${ui8ToString(swf, 'base64')}`}
         />
     ) : (
         <button style={{ width: '550px', height: '400px', display: 'block', cursor: 'pointer' }} type="button" tabIndex={0} onClick={() => setShowing(true)}>
