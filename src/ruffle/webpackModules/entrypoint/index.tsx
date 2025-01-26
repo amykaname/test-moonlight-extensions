@@ -1,4 +1,4 @@
-import React, { useState } from '@moonlight-mod/wp/react';
+import React, { useEffect, useState } from '@moonlight-mod/wp/react';
 import type { Props } from './types';
 import { Flash } from './ruffle';
 import type { AutoPlay, NetworkingAccessMode, OpenURLMode } from '@ruffle/public/config';
@@ -13,23 +13,20 @@ export function handleFileEmbed(props: Props) {
     }
 
     const [showing, setShowing] = useState(false);
+    const [swf, setSwf] = useState<Uint8Array>();
 
-    return showing ? (
-        <Flash
-            src={props.url}
-            config={{
-                // Ruffle configuration options
-                autoplay: 'on' as AutoPlay,
-                allowNetworking: 'none' as NetworkingAccessMode,
-                allowScriptAccess: false,
-                showSwfDownload: true,
-                favorFlash: false,
-                polyfills: false,
-                openUrlMode: 'confirm' as OpenURLMode,
-                base: 'https://this-is-unsafe.invalid/',
-            }}
-            width={550}
-            height={400}
+    useEffect(() => {
+        fetch(props.url)
+            .then(e => e.arrayBuffer())
+            .then(buf => setSwf(new Uint8Array(buf)));
+    }, [showing])
+
+    return showing && swf ? (
+        <iframe
+            title="Ruffle Frame"
+            width="550"
+            height="400"
+            src={`https://uwx.github.io/moonlight-ruffle-player-backend/#${btoa(String.fromCharCode(...swf))}`}
         />
     ) : (
         <button style={{ width: '550px', height: '400px', display: 'block', cursor: 'pointer' }} type="button" tabIndex={0} onClick={() => setShowing(true)}>

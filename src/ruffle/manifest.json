@@ -11,5 +11,8 @@
     "source": "https://github.com/uwx/moonlight-extensions"
   },
   "dependencies": [],
-  "cors": ["https://cdn.discordapp.com/attachments/"]
+  "cors": ["https://cdn.discordapp.com/attachments/"],
+  "csp": {
+    "frame-src": ["https://uwx.github.io/"]
+  }
 }
