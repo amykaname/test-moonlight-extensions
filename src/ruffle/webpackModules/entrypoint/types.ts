@@ -97,12 +97,10 @@ export interface Author {
     premiumUsageFlags:    number;
     phone:                string;
     nsfwAllowed:          boolean;
-    guildMemberAvatars:   GuildMemberAvatars;
+    guildMemberAvatars:   Record<string, unknown>;
     hasBouncedEmail:      boolean;
     personalConnectionId: null;
     globalName:           string;
     primaryGuild:         null;
 }
 
-export interface GuildMemberAvatars {
-}
