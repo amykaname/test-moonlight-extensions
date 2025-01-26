@@ -1,0 +1,14 @@
+{
+  "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
+  "id": "ruffle",
+  "version": "2.0.0",
+  "apiLevel": 2,
+  "meta": {
+    "name": "Ruffle",
+    "tagline": "Play SWF files",
+    "description": "Plays SWF files with Ruffle", 
+    "authors": ["uwx"],
+    "source": "https://github.com/uwx/moonlight-extensions"
+  },
+  "dependencies": ["spacepack"]
+}

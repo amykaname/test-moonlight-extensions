@@ -8,7 +8,10 @@
     "skipLibCheck": true,
     "moduleResolution": "bundler",
     "jsx": "react",
-    "baseUrl": "./src/"
+    "baseUrl": "./src/",
+    "paths": {
+      "@ruffle/*": ["../extern/ruffle/web/packages/core/src/*"]
+    }
   },
-  "include": ["./src/**/*", "./env.d.ts"]
+  "include": ["./src/**/*", "./env.d.ts", "./extern/ruffle/web/packages/core/src/**/*"]
 }
