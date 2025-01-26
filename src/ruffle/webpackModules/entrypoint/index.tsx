@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from '@moonlight-mod/wp/react';
+import React, { useEffect, useRef, useState } from '@moonlight-mod/wp/react';
 import type { Props } from './types';
 import { toString as ui8ToString } from 'uint8arrays';
 
@@ -13,20 +13,32 @@ export function handleFileEmbed(props: Props) {
 
     const [showing, setShowing] = useState(false);
     const [swf, setSwf] = useState<Uint8Array>();
+    const iframeRef = useRef<HTMLIFrameElement>(null);
 
     useEffect(() => {
         if (showing)
             fetch(props.url)
                 .then(e => e.arrayBuffer())
                 .then(buf => setSwf(new Uint8Array(buf)));
-    }, [showing])
+    }, [showing]);
+
+    useEffect(() => {
+        logger.info('sending message to iframe');
+        if (iframeRef.current && swf) {
+            iframeRef.current.contentWindow!.postMessage({
+                type: 'swf',
+                data: swf
+            }, '*');
+        }
+    }, [iframeRef.current]);
 
     return showing && swf ? (
         <iframe
+            ref={iframeRef}
             title="Ruffle Frame"
             width="550"
             height="400"
-            src={`https://uwx.github.io/moonlight-ruffle-player-backend/#${ui8ToString(swf, 'base64')}`}
+            src="https://uwx.github.io/moonlight-ruffle-player-backend/"
         />
     ) : (
         <button style={{ width: '550px', height: '400px', display: 'block', cursor: 'pointer' }} type="button" tabIndex={0} onClick={() => setShowing(true)}>
