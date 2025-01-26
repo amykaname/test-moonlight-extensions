@@ -66,9 +66,9 @@ export const Ruffle = ({ src, config, children, width, height, ...rest }: Ruffle
         window.RufflePlayer = window.RufflePlayer || {};
         window.RufflePlayer.config = mergedConfig;
 
-        const ifDocument = ref.current!.contentWindow!.document;
+        const frameDocument = ref.current!.contentWindow!.document;
 
-        const style = ifDocument.createElement('style');
+        const style = frameDocument.createElement('style');
         style.append(` 
             body {
                 margin: 0;
@@ -76,12 +76,12 @@ export const Ruffle = ({ src, config, children, width, height, ...rest }: Ruffle
             }
         `);
 
-        ifDocument.head.append(style);
+        frameDocument.head.append(style);
 
         const ruffle = (window.RufflePlayer as PublicAPI)!.newest()!;
         const player = ruffle.createPlayer();
-        const container = ifDocument.createElement('div');
-        ifDocument.body.append(container);
+        const container = frameDocument.createElement('div');
+        frameDocument.body.append(container);
         container.appendChild(player);
         rufflePlayer = player.ruffle();
         rufflePlayer.load(src);

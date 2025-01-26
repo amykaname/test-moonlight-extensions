@@ -22,7 +22,6 @@ export const patches: ExtensionWebExports["patches"] = [{
 export const webpackModules: ExtensionWebExports["webpackModules"] = {
     entrypoint: {
         dependencies: [
-            { ext: 'spacepack', id: 'spacepack' },
             'react'
         ],
         entrypoint: true

@@ -10,5 +10,5 @@
     "authors": ["uwx"],
     "source": "https://github.com/uwx/moonlight-extensions"
   },
-  "dependencies": ["spacepack"]
+  "dependencies": []
 }
