@@ -69,9 +69,23 @@ export function handleFileEmbed(props: Props) {
         />
     ) : (
         <button style={{ width: '550px', height: '400px', display: 'block', cursor: 'pointer' }} type="button" tabIndex={0} onClick={() => setShowing(true)}>
-            <span style={{ position: 'absolute', left: '1rem', top: '1rem' }}> 
-                Click to play {props.fileName} ({humanFileSize(props.fileSize)})
-            </span>
+            <div style={{ position: 'absolute', left: '1rem', top: '1rem', textAlign: 'left' }}>
+            <p>Click to play {props.fileName} ({humanFileSize(props.fileSize)})</p>
+                <button
+                    type="button"
+                    onClick={event => {
+                        event.stopPropagation();
+                        window.open(props.url, '_blank');
+                    }}
+                    style={{
+                        padding: '0.5rem',
+                        border: '1px solid #fa6a62',
+                        background: '#faac5d',
+                        borderRadius: '6px',
+                        marginTop: '0.5rem', 
+                    }}
+                >Download SWF</button>
+            </div>
             <div style={{
                 height: '50%',
                 left: '50%',
