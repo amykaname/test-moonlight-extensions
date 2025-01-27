@@ -13,7 +13,6 @@ export function handleFileEmbed(props: Props) {
 
     const [showing, setShowing] = useState(false);
     const [swf, setSwf] = useState<Uint8Array>();
-    const iframeRef = useRef<HTMLIFrameElement>(null);
 
     useEffect(() => {
         if (showing)
@@ -22,19 +21,15 @@ export function handleFileEmbed(props: Props) {
                 .then(buf => setSwf(new Uint8Array(buf)));
     }, [showing]);
 
-    useEffect(() => {
-        logger.info('sending message to iframe');
-        if (iframeRef.current && swf) {
-            iframeRef.current.contentWindow!.postMessage({
-                type: 'swf',
-                data: swf
-            }, '*');
-        }
-    }, [iframeRef.current]);
-
     return showing && swf ? (
         <iframe
-            ref={iframeRef}
+            onLoad={event => {
+                const iframe = event.currentTarget;
+                iframe.contentWindow!.postMessage({
+                    type: 'swf',
+                    data: swf
+                }, '*');
+            }}
             title="Ruffle Frame"
             width="550"
             height="400"
