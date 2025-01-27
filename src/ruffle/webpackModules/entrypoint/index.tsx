@@ -70,7 +70,7 @@ export function handleFileEmbed(props: Props) {
     ) : (
         <button style={{ width: '550px', height: '400px', display: 'block', cursor: 'pointer' }} type="button" tabIndex={0} onClick={() => setShowing(true)}>
             <div style={{ position: 'absolute', left: '1rem', top: '1rem', textAlign: 'left' }}>
-            <p>Click to play {props.fileName} ({humanFileSize(props.fileSize)})</p>
+                <p>Click to play {props.fileName} ({humanFileSize(props.fileSize)})</p>
                 <button
                     type="button"
                     onClick={event => {
