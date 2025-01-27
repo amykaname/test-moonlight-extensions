@@ -1,14 +1,15 @@
 {
   "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
   "id": "ruffle",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "apiLevel": 2,
   "meta": {
     "name": "Ruffle",
     "tagline": "Play SWF files",
     "description": "Plays SWF files with Ruffle", 
     "authors": ["uwx"],
-    "source": "https://github.com/uwx/moonlight-extensions"
+    "source": "https://github.com/uwx/moonlight-extensions",
+    "tags": ["fun", "dangerZone"]
   },
   "dependencies": [],
   "cors": ["https://cdn.discordapp.com/attachments/"],
