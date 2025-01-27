@@ -1,0 +1,18 @@
+{
+  "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
+  "id": "libretro",
+  "version": "1.0.0",
+  "apiLevel": 2,
+  "meta": {
+    "name": "Libretro",
+    "tagline": "Play emulated ROMs",
+    "description": "Plays your legally-owned ROMs with Libretro", 
+    "authors": ["uwx"],
+    "source": "https://github.com/uwx/moonlight-extensions"
+  },
+  "dependencies": [],
+  "cors": ["https://cdn.discordapp.com/attachments/"],
+  "csp": {
+    "frame-src": ["https://uwx.github.io/"]
+  }
+}
