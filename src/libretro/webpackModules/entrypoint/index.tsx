@@ -46,7 +46,7 @@ const supportedCores = {
     'stella2014': ['.a26'],
     'virtualjaguar': ['.jag', '.j64'],
     'vba_next': ['.gba'],
-    'prboom:': ['.wad'],
+    'prboom': ['.wad'],
     'gearboy': ['.gb', '.gbc'],
     'melonds': ['.nds', '.dsi'],
     'mednafen_ngp': ['.ngp', '.ngc'],
