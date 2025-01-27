@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from '@moonlight-mod/wp/react';
 import type { Props } from './types';
-import { toString as ui8ToString } from 'uint8arrays';
 
 const logger = moonlight.getLogger('libretro/entrypoint');
 
