@@ -38,18 +38,23 @@ function humanFileSize(bytes: number, si = false, dp = 1) {
 }
 
 const supportedCores = {
-    'genesis_plus_gx': ['.gen', '.md', '.smd', '.sms'],
-    'mupen64plus_next': ['.n64', '.v64', '.z64', '.ndd'],
-    'snes9x': ['.smc', '.sfc'],
-    'fceumm': ['.nes', '.fds'],
-    'stella2014': ['.a26'],
-    'virtualjaguar': ['.jag', '.j64'],
-    'vba_next': ['.gba'],
-    'prboom': ['.wad'],
-    'gearboy': ['.gb', '.gbc'],
-    'melonds': ['.nds', '.dsi'],
-    'mednafen_ngp': ['.ngp', '.ngc'],
-    'mednafen_vb': ['.vb'],
+    '81': ['.p', '.tzx'],
+    genesis_plus_gx: ['.gen', '.md', '.smd', '.sms'],
+    mupen64plus_next: ['.n64', '.v64', '.z64', '.ndd'],
+    snes9x: ['.smc', '.sfc'],
+    fceumm: ['.nes', '.fds'],
+    stella2014: ['.a26'],
+    virtualjaguar: ['.jag', '.j64'],
+    vba_next: ['.gba'],
+    prboom: ['.wad'],
+    gearboy: ['.gb', '.gbc'],
+    melonds: ['.nds', '.dsi'],
+    mednafen_ngp: ['.ngp', '.ngc'],
+    mednafen_vb: ['.vb'],
+    mednafen_pce_fast: ['.pce'],
+    mednafen_wswan: ['.ws', '.wsc', '.pc2'],
+    tyrquake: ['.pak'],
+    vecx: ['.vec'],
 };
 
 const coreByExtension = Object.fromEntries(
