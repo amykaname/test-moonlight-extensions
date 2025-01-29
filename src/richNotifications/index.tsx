@@ -8,13 +8,12 @@ export const patches: ExtensionWebExports["patches"] = [
             match: /window\.Notification/g,
             replacement: 'require("richNotifications_entrypoint").NotificationEx'
         }, {
-            match: /showNotification:(\w+)/,
-            replacement: `showNotification: function(...args) {
-                let result = require("richNotifications_entrypoint").handleShowNotification(...args);
-                if (typeof result !== 'undefined') return result;
-
-                return ($1).apply(this, args);
-            }`,
+            match: /showNotification:async function\((.*?)\)\{/,
+            replacement: `$&
+                {
+                    let result = require("richNotifications_entrypoint").handleShowNotification(...arguments);
+                    if (typeof result !== 'undefined') return result;
+                };`,
         }]
     },
     {
