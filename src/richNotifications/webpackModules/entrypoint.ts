@@ -23,7 +23,7 @@ function cleanContent(content: string, guild?: Guild) {
         .replace(userRegex, ($$, $1) => `@${guild != null && GuildMemberStore.getNick(guild.id, $1) || getDisplayName(UserStore.getUser($1))}`)
         .replace(channelRegex, ($$, $1) => `#${ChannelStore.getChannel($1)?.name}`)
         .replace(emojiRegex, ($$, $1) => `:${$1}:`)
-        .replace(roleRegex, ($$, $1) => `@${guild?.getRole($1)?.name ?? "unknown-role"}`)
+        .replace(roleRegex, ($$, $1) => `@${guild != null && GuildStore.getRole(guild.id, $1)?.name || "unknown-role"}`) 
         .replace(/^.{129,}$/, $$ => `${$$.slice(0, 125)}...`);
 }
 
