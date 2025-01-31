@@ -1,0 +1,16 @@
+{
+  "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
+  "id": "elementChat",
+  "version": "1.0.0",
+  "apiLevel": 2,
+  "meta": {
+    "name": "Element Chat",
+    "tagline": "Other chat app inside discord, waow!",
+    "description": "Adds a button to take you to the Element Chat app inside the application",
+    "authors": ["uwx"],
+    "source": "https://github.com/uwx/moonlight-extensions"
+  },
+  "csp": {
+    "frame-src": ["https://app.element.io/"]
+  }
+}
