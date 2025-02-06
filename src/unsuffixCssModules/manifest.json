@@ -1,0 +1,13 @@
+{
+  "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
+  "id": "unsuffixCssModules",
+  "version": "1.0.0",
+  "apiLevel": 2,
+  "meta": {
+    "name": "Unsuffix CSS Modules",
+    "tagline": "Adds unsuffixed names to CSS module classes",
+    "description": "TODO add better description",
+    "authors": ["uwx"],
+    "source": "https://github.com/uwx/moonlight-extensions"
+  }
+}
