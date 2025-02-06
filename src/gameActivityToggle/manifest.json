@@ -1,0 +1,14 @@
+{
+  "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
+  "id": "gameActivityToggle",
+  "version": "1.0.0",
+  "apiLevel": 2,
+  "meta": {
+    "name": "Game Activity Toggle",
+    "tagline": "Adds a button next to the mic and deafen button to toggle game activity.",
+    "description": "Ported from Vencord. Originally by Nuckyz and RuukuLada.",
+    "authors": ["uwx"],
+    "source": "https://github.com/uwx/moonlight-extensions"
+  },
+  "dependencies": ["spacepack", "userSettingsApi", "common"]
+}
