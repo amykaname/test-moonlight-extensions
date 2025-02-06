@@ -29,6 +29,7 @@ export const patches: ExtensionWebExports["patches"] = [
 export const webpackModules: ExtensionWebExports["webpackModules"] = {
     api: {
         dependencies: [
+            '"textAndImages","renderSpoilers"',
             {
                 ext: 'spacepack',
                 id: 'spacepack',

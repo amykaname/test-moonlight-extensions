@@ -1,11 +1,9 @@
 import React from '@moonlight-mod/wp/react';
 import { spacepack } from '@moonlight-mod/wp/spacepack_spacepack';
-import { getUserSettingLazy } from '@moonlight-mod/wp/userSettingsApi_api';
+import { getUserSetting } from '@moonlight-mod/wp/userSettingsApi_api';
 import ErrorBoundary from '@moonlight-mod/wp/common_ErrorBoundary';
 
 const Button = spacepack.findByCode(".NONE,disabled:", ".PANEL_BUTTON")[0].exports.Z;
-
-const ShowCurrentGame = getUserSettingLazy<boolean>("status", "showCurrentGame")!;
 
 function makeIcon(showCurrentGame?: boolean) {
     const oldIcon = false;
@@ -37,8 +35,9 @@ function makeIcon(showCurrentGame?: boolean) {
 }
 
 export function GameActivityToggleButtonInternal() {
-    const ShowCurrentGame1 = ShowCurrentGame()!;
-    const showCurrentGame = ShowCurrentGame1.useSetting();
+    const ShowCurrentGame = getUserSetting<boolean>("status", "showCurrentGame")!;
+    
+    const showCurrentGame = ShowCurrentGame.useSetting();
 
     return (
         <Button
@@ -46,7 +45,7 @@ export function GameActivityToggleButtonInternal() {
             icon={makeIcon(showCurrentGame)}
             role="switch"
             aria-checked={!showCurrentGame}
-            onClick={() => ShowCurrentGame1.updateSetting(old => !old)}
+            onClick={() => ShowCurrentGame.updateSetting(old => !old)}
         />
     );
 }

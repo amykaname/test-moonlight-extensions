@@ -1,11 +1,11 @@
 {
   "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
   "id": "userSettingsApi",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "apiLevel": 2,
   "meta": {
     "name": "User Settings API",
-    "tagline": "Port of UserSettingsAPI from Vencord.",
+    "tagline": "Port of UserSettingsAPI from Vencord. Allows reactive access to local Discord settings.",
     "description": "Does nothing on its own. Require 'userSettingsApi_api' via spacepack to use.",
     "authors": ["uwx"],
     "source": "https://github.com/uwx/moonlight-extensions",
