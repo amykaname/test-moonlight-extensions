@@ -185,7 +185,7 @@ function Search(props: MfmProps<MfmSearch>) {
                 event.preventDefault();
                 event.stopPropagation();
                 window.open(
-                    `https://www.google.com/search?q=${encodeURIComponent(value.value)}`,
+                    `https://www.google.com/search?q=${encodeURIComponent(value)}`,
                     '_blank'
                 );
             }}>
@@ -219,7 +219,7 @@ function Text(props: MfmProps<MfmText> & { plain: boolean }) {
     }
 
     return parsedText.map((t, i) => (<>
-        <span class={`text ${props.className ?? ''}`} style={props.style}> { t }</span>
+        <span className={`text ${props.className ?? ''}`} style={props.style}> { t }</span>
         {showBr(t, i) ? <br /> : <></>}
     </>));
 }
