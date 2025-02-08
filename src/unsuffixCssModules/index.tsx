@@ -22,6 +22,7 @@ export const webpackModules: ExtensionWebExports["webpackModules"] = {
         entrypoint: true,
         dependencies: [
             { id: 'react' },
+            { ext: 'common', id: 'ErrorBoundary' },
         ]
     },
 };
