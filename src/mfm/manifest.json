@@ -5,7 +5,7 @@
   "apiLevel": 2,
   "meta": {
     "name": "Markup language For Misskey",
-    "tagline": "Adds MFM support for code blocks",
+    "tagline": "Adds MFM support for code blocks using ```mfm ```",
     "description": "See https://misskey-hub.net/en/docs/for-users/features/mfm/ for a guide on how to use MFM.",
     "authors": ["uwx"],
     "source": "https://github.com/uwx/moonlight-extensions"
