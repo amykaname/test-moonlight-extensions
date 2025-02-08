@@ -1,5 +1,7 @@
 src/userSettingsApi, src/gameActivityToggle, and any code that links to it are under the GPLv3 (see
 https://github.com/Vendicated/Vencord/blob/main/LICENSE).
 
+src/mfm is under AGPLv3 (see https://github.com/misskey-dev/misskey/blob/develop/LICENSE).
+
 All other code is under LGPLv3 (see https://github.com/moonlight-mod/moonlight/blob/main/LICENSE) if permitted, unless
 otherwise specified.
