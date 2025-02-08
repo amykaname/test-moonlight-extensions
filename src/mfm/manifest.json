@@ -1,0 +1,13 @@
+{
+  "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
+  "id": "mfm",
+  "version": "1.0.0",
+  "apiLevel": 2,
+  "meta": {
+    "name": "Markup language For Misskey",
+    "tagline": "Adds MFM support for code blocks",
+    "description": "See https://misskey-hub.net/en/docs/for-users/features/mfm/ for a guide on how to use MFM.",
+    "authors": ["uwx"],
+    "source": "https://github.com/uwx/moonlight-extensions"
+  }
+}
