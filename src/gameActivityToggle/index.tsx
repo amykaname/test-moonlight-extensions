@@ -1,13 +1,11 @@
 import type { ExtensionWebExports } from "@moonlight-mod/types";
 
-const logger = moonlight.getLogger("toggleReadNotificationsAloud");
-
 // extension will fail to load if this is not present
 export const patches: ExtensionWebExports["patches"] = [
     {
         find: "shouldShowSpeakingWhileMutedTooltip",
         replace: {
-            match: /this\.renderNameZone\(\).+?children:\[/,
+            match: /className:\i\.buttons,.{0,50}children:\[/,
             replacement: "$&require('gameActivityToggle_entrypoint').GameActivityToggleButton(),"
         }
     }
