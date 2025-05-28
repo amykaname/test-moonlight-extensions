@@ -1,6 +1,6 @@
 import React from '@moonlight-mod/wp/react';
 import { spacepack } from '@moonlight-mod/wp/spacepack_spacepack';
-import { getUserSetting } from '@moonlight-mod/wp/userSettingsApi_api';
+import { ShowCurrentGame } from '@moonlight-mod/wp/discord/modules/user_settings/UserSettings';
 import ErrorBoundary from '@moonlight-mod/wp/common_ErrorBoundary';
 
 const Button = spacepack.findByCode(".NONE,disabled:", ".PANEL_BUTTON")[0].exports.Z;
@@ -35,8 +35,6 @@ function makeIcon(showCurrentGame?: boolean) {
 }
 
 export function GameActivityToggleButtonInternal() {
-    const ShowCurrentGame = getUserSetting<boolean>("status", "showCurrentGame")!;
-    
     const showCurrentGame = ShowCurrentGame.useSetting();
 
     return (
@@ -46,7 +44,7 @@ export function GameActivityToggleButtonInternal() {
             role="switch"
             aria-checked={!showCurrentGame}
             redGlow={!showCurrentGame}
-            onClick={() => ShowCurrentGame.updateSetting(old => !old)}
+            onClick={() => ShowCurrentGame.updateSetting(!showCurrentGame)}
         />
     );
 }
