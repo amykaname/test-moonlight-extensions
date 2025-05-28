@@ -20,10 +20,6 @@ export const webpackModules: ExtensionWebExports["webpackModules"] = {
                 id: 'spacepack',
             },
             {
-                ext: 'userSettingsApi',
-                id: 'api',
-            },
-            {
                 ext: 'common',
                 id: 'ErrorBoundary',
             }
