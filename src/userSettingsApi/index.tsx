@@ -7,8 +7,8 @@ export const patches: ExtensionWebExports["patches"] = [
         replace: [
             // Main setting definition
             {
-                match: /(?<=INFREQUENT_USER_ACTION.{0,20},)useSetting:/,
-                replacement: "userSettingsAPIGroup:arguments[0],userSettingsAPIName:arguments[1],$&"
+                match: /\.updateAsync\(.+?(?=,useSetting:)/,
+                replacement: "$&,userSettingsAPIGroup:arguments[0],userSettingsAPIName:arguments[1]"
             },
             // Selective wrapper
             {
