@@ -1,0 +1,22 @@
+[
+  {
+    "$schema": "https://moonlight-mod.github.io/manifest.schema.json",
+    "id": "freeMoji",
+    "version": "1.0.4",
+    "apiLevel": 2,
+    "meta": {
+      "name": "Freemoji but not webp",
+      "tagline": "Free Nitro emoji!",
+      "description": "FUCK webp bro",
+      "authors": [
+        "uwx",
+        "maisymoe"
+      ],
+      "source": "https://github.com/uwx/moonlight-extensions"
+    },
+    "dependencies": [
+      "spacepack"
+    ],
+    "download": "https://github.com/amykaname/test-moonlight-extensions/raw/refs/heads/master/freeMoji.asar"
+  }
+]
